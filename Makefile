@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -Wextra
+CFLAGS = -g -Wall -Wextra -O2
 SRC_DIR = src/
 OBJ_DIR = bin/obj/
 EXEC_DIR = bin/
@@ -8,14 +8,15 @@ TARGET = out
 
 #### DO NOT EDIT BELOW THIS LINE ####
 
-BUILD = $(EXEC_DIR)$(NAME).$(TARGET)
+EXEC = $(NAME).$(TARGET)
+BUILD = $(EXEC_DIR)$(EXEC)
 SRCS := $(wildcard src/**/**.c) $(wildcard src/*.c)
 OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
 
 all: $(OBJS)
-	@echo [INFO] Creating Binary Executable [$(TARGET)]
+	@echo [INFO] Creating Binary Executable [$(TARGET)] ...
 	@$(CC) -o $(BUILD) $^
-	@echo [INFO] [$(NAME).$(TARGET)] Created!
+	@echo [INFO] [$(EXEC)] Created!
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@echo [CC] $<
@@ -23,14 +24,19 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) $< -c -o $@
 
 run: all
-	@echo [RUNNING]
-	@$(EXEC_DIR)./$(NAME).$(TARGET)
-	@echo [DONE]
+	@echo [INFO] Running ...
+	@$(EXEC_DIR)./$(EXEC)
+	@echo [EXEC] Done!
+
+debug: all
+	@echo [INFO] Debugging ...
+	@valgrind --tool=memcheck --leak-check=yes --track-origins=yes $(EXEC_DIR)/.$(EXEC)
+	@echo [DEBUG] Done!
 
 .PHONY: clean
 clean:
-	@echo [CLEANING OBJECTS]
+	@echo [INFO] Removing Pre-compiled Object Files
 	@rm -rf $(OBJ_DIR)*.o
 	@rm -rf $(OBJ_DIR)**/**.o
-	@echo [CLEANING EXECUTABLES]
+	@echo [INFO] Removing Compiled Executable(s)
 	@rm $(BUILD)
