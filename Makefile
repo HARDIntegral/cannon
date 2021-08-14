@@ -1,14 +1,36 @@
 CC = gcc
 CFLAGS = -g -Wall -Wextra
-OBJ_DIR = bin/obj
+SRC_DIR = src/
+OBJ_DIR = bin/obj/
 EXEC_DIR = bin/
-NAME = la.out
-BUILD = $(EXEC_DIR)$(NAME)
+NAME = la
+TARGET = out
 
-SRCS := $(shell find . -name "*.c")
+#### DO NOT EDIT BELOW THIS LINE ####
 
-all: $(SRCS)
-	$(CC) $(SRCS) -o $(BUILD)
+BUILD = $(EXEC_DIR)$(NAME).$(TARGET)
+SRCS := $(wildcard src/**/**.c) $(wildcard src/*.c)
+OBJS := $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRCS))
+
+all: $(OBJS)
+	@echo [INFO] Creating Binary Executable [$(TARGET)]
+	@$(CC) -o $(BUILD) $^
+	@echo [INFO] [$(NAME).$(TARGET)] Created!
+
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+	@echo [CC] $<
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $< -c -o $@
 
 run: all
-	$(BUILD)
+	@echo [RUNNING]
+	@$(EXEC_DIR)./$(NAME).$(TARGET)
+	@echo [DONE]
+
+.PHONY: clean
+clean:
+	@echo [CLEANING OBJECTS]
+	@rm -rf $(OBJ_DIR)*.o
+	@rm -rf $(OBJ_DIR)**/**.o
+	@echo [CLEANING EXECUTABLES]
+	@rm $(BUILD)
