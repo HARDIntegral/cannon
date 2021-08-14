@@ -30,7 +30,7 @@ run: all
 
 debug: all
 	@echo [INFO] Debugging ...
-	@valgrind --tool=memcheck --leak-check=yes --track-origins=yes $(EXEC_DIR)/.$(EXEC)
+	@valgrind --tool=memcheck --leak-check=yes --track-origins=yes $(EXEC_DIR)./$(EXEC)
 	@echo [DEBUG] Done!
 
 .PHONY: clean
