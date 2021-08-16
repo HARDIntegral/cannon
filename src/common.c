@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 double* copy_darr(double* array, int len) {
-    double* new_arr = (double*)malloc(len);
+    double* new_arr = (double*)malloc(sizeof(double) * len);
     for (int i=0; i < len; i++)
         *(new_arr + i) = *(array + i);
 

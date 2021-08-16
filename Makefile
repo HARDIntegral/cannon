@@ -38,5 +38,5 @@ clean:
 	@echo [INFO] Removing Pre-compiled Object Files
 	@rm -rf $(OBJ_DIR)*.o
 	@rm -rf $(OBJ_DIR)**/**.o
-	@echo [INFO] Removing Compiled Executable(s)
-	@rm $(BUILD)
+	@echo [INFO] Removing Compiled Executables
+	@rm -rf $(EXEC_DIR)*.$(TARGET)

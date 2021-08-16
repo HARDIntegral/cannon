@@ -8,6 +8,9 @@
 #include <string.h>
 #include <stdio.h>
 
+#define SUCCESS 1
+#define FAILURE 0
+
 typedef enum ERR_STATE ERR_STATE;
 enum ERR_STATE {
     NONE,

@@ -12,8 +12,8 @@ struct mod_vec {
 
 typedef struct vec_list vec_list;
 struct vec_list {
-    mod_vec* list;
-    int len;
+    mod_vec* head;
+    int size;
 };
 
 typedef struct raw_matrix raw_matrix;
@@ -25,7 +25,7 @@ struct raw_matrix {
 
 typedef struct matrix matrix;
 struct matrix {
-    raw_matrix* raw_matrix;
+    raw_matrix* raw_mtx;
     ERR_STATE STATE;
 };
 
