@@ -2,7 +2,6 @@
 #define MATRIX_H
 
 #include "../common.h"
-#include "vector.h"
 
 typedef struct raw_matrix raw_matrix;
 struct raw_matrix {

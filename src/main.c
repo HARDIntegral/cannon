@@ -27,5 +27,17 @@ int main(int argc, char** argv) {
         print_matrix(test_mtx);
         destroy_matrix(test_mtx);
     }
-
+    {
+        printf("testing vector dot product\n");
+        double a_values[3] = {3, 5, 8};
+        double b_values[3] = {2, 7, 1};
+        vector* a = construct_vector(a_values, 3);
+        vector* b = construct_vector(b_values, 3);
+        double* c = (double*)malloc(sizeof(double));
+        vec_dotp(a, b, c);
+        printf("the dot product is: %f\n", *c);
+        destroy_vector(a); 
+        destroy_vector(b);
+        free(c);
+    }
 }

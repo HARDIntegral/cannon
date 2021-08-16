@@ -25,3 +25,18 @@ void print_vec(vector* vec) {
         printf("%f, ", *(vec->raw_vector->vector + i));
     printf("\n");
 }
+
+void vec_dotp(vector* a, vector* b, double* dotp) {
+    if (a == NULL || b == NULL)
+        return;
+    if (a->STATE != NONE || b->STATE != NONE)
+        return;
+    int a_len = a->raw_vector->size;
+    if (a_len != b->raw_vector->size)
+        return;
+
+    double tmp = 0; 
+    for (int i=0; i < a_len; i++)
+        tmp += *(a->raw_vector->vector + i) * *(b->raw_vector->vector + i);
+    *dotp = tmp;
+}

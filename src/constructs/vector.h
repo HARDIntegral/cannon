@@ -20,4 +20,9 @@ void destroy_vector(vector* vec);
 
 void print_vec(vector* vec);
 
+// MATH
+
+// this operation is non destructive, input vectors are kept safe
+void vec_dotp(vector* a, vector* b, double* dotp);
+
 #endif // VECTOR_H
