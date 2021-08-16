@@ -25,6 +25,8 @@ matrix* construct_matrix(double** values, int width, int height) {
     new_mtx->raw_mtx->columns->size = 0;
     new_mtx->raw_mtx->columns->head = NULL;
 
+    fill_mtx(new_mtx, values, width, height);
+
     return new_mtx;
 }
 
