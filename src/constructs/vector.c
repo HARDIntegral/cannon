@@ -19,6 +19,8 @@ void destroy_vector(vector *vec) {
 }
 
 void print_vec(vector* vec) {
+    if (vec->STATE != NONE)
+        return;
     for (int i=0; i < vec->raw_vector->size; i++)
         printf("%f, ", *(vec->raw_vector->vector + i));
     printf("\n");
