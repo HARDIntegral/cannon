@@ -20,7 +20,7 @@ matrix* construct_matrix(double** values, int width, int height) {
 }
 
 void destroy_matrix(matrix *mtx) {
-    deep_free((void**)(mtx->raw_mtx->values));
+    deep_free((void**)&(mtx->raw_mtx->values));
     deep_free((void**)&(mtx->raw_mtx));
     deep_free((void**)&mtx);
 }
